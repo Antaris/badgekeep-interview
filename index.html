@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Independent BadgeKeep research survey for UK Blue Badge holders and carers.">
+  <title>BadgeKeep research | Share your experience</title>
+  <style>
+    :root {
+      --ink: #142d42;
+      --ink-soft: #4c6476;
+      --blue: #1c5d89;
+      --blue-deep: #12466b;
+      --blue-pale: #eaf4fa;
+      --blue-wash: #f5f9fc;
+      --line: #cbd9e2;
+      --paper: #ffffff;
+      --canvas: #f2f6f8;
+      --warm: #fff8e8;
+      --warm-line: #e5c979;
+      --focus: #f3b400;
+      --success: #155d4a;
+      --radius: 14px;
+      --shadow: 0 10px 35px rgba(20, 45, 66, .08);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; color: var(--ink); background: var(--canvas); font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; line-height: 1.55; font-size: 16px; }
+    a { color: var(--blue-deep); text-underline-offset: 3px; }
+    a:hover { color: #0a3551; }
+    :focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+    .skip-link { position: absolute; left: 1rem; top: -4rem; z-index: 10; padding: .65rem .9rem; color: #fff; background: var(--ink); border-radius: 6px; }
+    .skip-link:focus { top: 1rem; }
+    .shell { width: min(100% - 2rem, 920px); margin-inline: auto; }
+    .site-header { padding: 2.75rem 0 2rem; background: linear-gradient(135deg, #e7f2f8 0%, #f7fbfd 68%, #fff 100%); border-bottom: 1px solid var(--line); }
+    .brand { display: inline-flex; align-items: center; gap: .65rem; margin-bottom: 1.2rem; color: var(--blue-deep); font-weight: 800; letter-spacing: -.02em; font-size: 1.1rem; }
+    .brand-mark { display: grid; place-items: center; width: 2rem; height: 2rem; color: #fff; background: var(--blue); border-radius: 9px; font-size: 1rem; }
+    h1, h2, h3 { line-height: 1.15; letter-spacing: -.025em; }
+    h1 { max-width: 700px; margin: 0 0 1rem; font-size: clamp(2rem, 6vw, 3.65rem); }
+    h2 { margin: 0; font-size: clamp(1.45rem, 3vw, 2rem); }
+    h3 { margin: 0 0 .45rem; font-size: 1.08rem; }
+    .lede { max-width: 690px; margin: 0; color: var(--ink-soft); font-size: 1.08rem; }
+    .trust-panel { margin-top: 1.7rem; padding: 1rem 1.1rem; background: rgba(255,255,255,.8); border: 1px solid #b9d0de; border-left: 5px solid var(--blue); border-radius: 10px; }
+    .trust-panel strong { display: block; margin-bottom: .25rem; color: var(--ink); }
+    .trust-panel p { margin: .35rem 0; color: var(--ink-soft); }
+    .trust-panel ul { margin: .55rem 0 0 1.15rem; padding: 0; color: var(--ink-soft); }
+    .warning { margin-top: 1rem; padding: .8rem 1rem; color: #4d3d14; background: var(--warm); border: 1px solid var(--warm-line); border-radius: 9px; }
+    main { padding: 2rem 0 4rem; }
+    .intro-note { margin: 0 0 1.5rem; color: var(--ink-soft); }
+    form { display: grid; gap: 1.25rem; }
+    .section-card { padding: clamp(1.1rem, 3vw, 1.8rem); background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); }
+    .section-heading { display: flex; align-items: flex-start; gap: .85rem; margin-bottom: 1.35rem; }
+    .step { display: grid; flex: 0 0 auto; place-items: center; width: 2.15rem; height: 2.15rem; color: #fff; background: var(--blue); border-radius: 50%; font-weight: 750; }
+    .section-heading p { margin: .25rem 0 0; color: var(--ink-soft); }
+    .field + .field { margin-top: 1.35rem; }
+    label, legend { font-weight: 700; }
+    label { display: block; }
+    .hint, .question-note { display: block; margin-top: .28rem; color: var(--ink-soft); font-size: .93rem; font-weight: 400; }
+    input[type="text"], input[type="email"], select, textarea { display: block; width: 100%; margin-top: .55rem; padding: .75rem .8rem; color: var(--ink); background: #fff; border: 1px solid #8ea8b8; border-radius: 8px; font: inherit; }
+    textarea { min-height: 7.5rem; resize: vertical; }
+    input::placeholder { color: #637787; }
+    select { min-height: 3rem; }
+    .radio-set { margin: 0; padding: 0; border: 0; }
+    .radio-set legend { padding: 0; }
+    .options { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: .65rem; margin-top: .7rem; }
+    .option { display: flex; align-items: flex-start; gap: .6rem; min-height: 3rem; padding: .7rem .75rem; background: var(--blue-wash); border: 1px solid var(--line); border-radius: 8px; font-weight: 550; cursor: pointer; }
+    .option:hover { border-color: var(--blue); background: var(--blue-pale); }
+    .option input { flex: 0 0 auto; width: 1.1rem; height: 1.1rem; margin: .1rem 0 0; accent-color: var(--blue); }
+    .idea { margin: 0 0 1.2rem; padding: 1rem 1.05rem; color: #23465c; background: var(--blue-pale); border: 1px solid #c3dce9; border-radius: 10px; }
+    .price-grid { display: grid; gap: .8rem; }
+    .price-row { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 1rem; padding: .8rem .9rem; background: var(--blue-wash); border: 1px solid var(--line); border-radius: 9px; }
+    .price-row strong { display: block; }
+    .price-row small { color: var(--ink-soft); }
+    .price-options { display: flex; gap: .8rem; flex-wrap: wrap; }
+    .price-options .option { min-width: 0; background: #fff; }
+    .consent { padding: 1rem 1.05rem; background: #f4faf7; border: 1px solid #b9d9ca; border-radius: 10px; }
+    .consent label { display: flex; align-items: flex-start; gap: .7rem; font-weight: 650; }
+    .consent input { flex: 0 0 auto; width: 1.2rem; height: 1.2rem; margin-top: .15rem; accent-color: var(--success); }
+    .form-footer { display: grid; gap: .8rem; margin-top: .3rem; }
+    button { width: 100%; padding: .9rem 1.2rem; color: #fff; background: var(--blue-deep); border: 2px solid var(--blue-deep); border-radius: 9px; font: inherit; font-weight: 750; cursor: pointer; }
+    button:hover { background: #0d3855; }
+    .privacy-note { margin: 0; color: var(--ink-soft); font-size: .9rem; }
+    .site-footer { padding: 1.5rem 0 2.5rem; color: var(--ink-soft); font-size: .9rem; text-align: center; }
+    @media (min-width: 640px) { .shell { width: min(100% - 3rem, 920px); } .site-header { padding-top: 4rem; } .form-footer { grid-template-columns: auto 1fr; align-items: center; } button { width: auto; min-width: 210px; } }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#survey">Skip to survey</a>
+  <header class="site-header">
+    <div class="shell">
+      <div class="brand"><span class="brand-mark" aria-hidden="true">✓</span> BadgeKeep research</div>
+      <h1>Help us make Blue Badge renewals easier to keep track of.</h1>
+      <p class="lede">A short, self-serve research survey for UK Blue Badge holders and carers. We are learning what really helps before building anything.</p>
+      <div class="trust-panel" role="note" aria-label="Important information">
+        <strong>BadgeKeep research — independent. Not GOV.UK or your council.</strong>
+        <p>For an official application or renewal route, use <a href="https://www.gov.uk/apply-blue-badge">GOV.UK: apply for a Blue Badge</a>.</p>
+        <ul>
+          <li>Do not enter your badge number, National Insurance number, medical details or documents here.</li>
+          <li><strong>Scam warning:</strong> never pay fake badge fees. In England, only pay an official fee through your council or the GOV.UK route if you are charged.</li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <main id="survey" class="shell">
+    <p class="intro-note">There are six short sections. Please answer based on your own experience; “Prefer not to say” and “Not sure” are fine where offered.</p>
+    <!-- Replace FORM_ID_PLACEHOLDER in the Formspree action with the form ID from your Formspree account. -->
+    <form action="https://formspree.io/f/FORM_ID_PLACEHOLDER" method="POST">
+      <input type="hidden" name="_subject" value="BadgeKeep research response">
+      <input type="hidden" name="_next" value="thank-you.html">
+
+      <section class="section-card" aria-labelledby="about-heading">
+        <div class="section-heading"><span class="step" aria-hidden="true">1</span><div><h2 id="about-heading">About you</h2><p>A little context helps us read your answers.</p></div></div>
+        <div class="field">
+          <fieldset class="radio-set"><legend>Which best describes you? <span aria-hidden="true">*</span></legend><div class="options">
+            <label class="option"><input type="radio" name="role" value="holder" required> Blue Badge holder</label>
+            <label class="option"><input type="radio" name="role" value="carer"> Carer or supporter</label>
+            <label class="option"><input type="radio" name="role" value="both"> Both</label>
+          </div></fieldset>
+        </div>
+        <div class="field"><label for="nation">Which UK nation is your council or application in? <span aria-hidden="true">*</span></label><select id="nation" name="nation" required><option value="" selected disabled>Select one</option><option value="england">England</option><option value="scotland">Scotland</option><option value="wales">Wales</option><option value="northern_ireland">Northern Ireland</option><option value="prefer_not_to_say">Prefer not to say</option></select></div>
+      </section>
+
+      <section class="section-card" aria-labelledby="renewal-heading">
+        <div class="section-heading"><span class="step" aria-hidden="true">2</span><div><h2 id="renewal-heading">Last renewal</h2><p>Think about your most recent application or renewal.</p></div></div>
+        <div class="field"><label for="last-renewal">When was your last renewal or application? <span aria-hidden="true">*</span></label><select id="last-renewal" name="last_renewal" required><option value="" selected disabled>Select one</option><option value="within_last_year">Within the last year</option><option value="one_to_three_years_ago">1–3 years ago</option><option value="never_renewed_first_application">Never renewed / first application</option><option value="prefer_not_to_say">Prefer not to say</option></select></div>
+        <div class="field"><label for="how-learned-expiry">How did you learn that your Blue Badge was due to expire? <span aria-hidden="true">*</span></label><select id="how-learned-expiry" name="how_learned_expiry" required><option value="" selected disabled>Select one</option><option value="email">Email</option><option value="letter">Letter</option><option value="sms">SMS</option><option value="checked_myself">I checked myself</option><option value="carer_told_me">A carer or supporter told me</option><option value="other">Other</option></select></div>
+      </section>
+
+      <section class="section-card" aria-labelledby="reminders-heading">
+        <div class="section-heading"><span class="step" aria-hidden="true">3</span><div><h2 id="reminders-heading">Official reminders</h2><p>We want to understand what happens in real life, not test your memory.</p></div></div>
+        <div class="field"><fieldset class="radio-set"><legend>Did you get a usable reminder from the national service or your council? <span aria-hidden="true">*</span></legend><div class="options"><label class="option"><input type="radio" name="got_official_reminder" value="yes" required> Yes</label><label class="option"><input type="radio" name="got_official_reminder" value="no"> No</label><label class="option"><input type="radio" name="got_official_reminder" value="not_sure"> Not sure</label></div></fieldset></div>
+        <div class="field"><label for="reminder-usable-detail">What made the reminder useful or not useful? <span class="hint">Optional — please do not include personal or medical information.</span></label><textarea id="reminder-usable-detail" name="reminder_usable_detail" placeholder="For example: when it arrived, what it said, or what you had to do next."></textarea></div>
+        <div class="field"><label for="process-friction">What was confusing, hard or delayed in the process? <span aria-hidden="true">*</span></label><textarea id="process-friction" name="process_friction" required placeholder="Please do not include badge numbers, medical details or documents."></textarea></div>
+        <div class="field"><fieldset class="radio-set"><legend>Did you miss your renewal, or come close to missing it? <span aria-hidden="true">*</span></legend><div class="options"><label class="option"><input type="radio" name="missed_or_nearly" value="yes" required> Yes, I missed it</label><label class="option"><input type="radio" name="missed_or_nearly" value="nearly"> I nearly missed it</label><label class="option"><input type="radio" name="missed_or_nearly" value="no"> No</label></div></fieldset></div>
+        <div class="field"><fieldset class="radio-set"><legend>Before today, did you know the free route may include a GOV.UK email around 12 weeks before expiry when an email is on file, and that councils vary? <span aria-hidden="true">*</span></legend><div class="options"><label class="option"><input type="radio" name="free_path_knowledge" value="yes" required> Yes</label><label class="option"><input type="radio" name="free_path_knowledge" value="no"> No</label></div></fieldset></div>
+        <div class="field"><label for="job-left">If a free reminder were reliable, what job would still be left for you? <span aria-hidden="true">*</span></label><textarea id="job-left" name="job_left_if_reminder" required placeholder="For example: checking evidence, getting a photo, or completing the council form."></textarea></div>
+      </section>
+
+      <section class="section-card" aria-labelledby="idea-heading">
+        <div class="section-heading"><span class="step" aria-hidden="true">4</span><div><h2 id="idea-heading">The idea</h2><p>React to the concept, not to a finished product.</p></div></div>
+        <div class="idea"><strong>What BadgeKeep might be:</strong> an independent planning checklist with an evidence guide, a photo guide, a simple timeline and an option to share reminders with a carer. It would not be a government portal, would not decide eligibility and would not replace GOV.UK or your council.</div>
+        <div class="field"><fieldset class="radio-set"><legend>Would that checklist change what you do? <span aria-hidden="true">*</span></legend><span class="question-note">Think about the evidence checklist, photo guide, timeline and carer sharing together.</span><div class="options"><label class="option"><input type="radio" name="checklist_would_change" value="yes" required> Yes</label><label class="option"><input type="radio" name="checklist_would_change" value="somewhat"> Somewhat</label><label class="option"><input type="radio" name="checklist_would_change" value="no"> No</label></div></fieldset></div>
+        <div class="field"><fieldset class="radio-set"><legend>After reading that it is not government, would you trust BadgeKeep to email you about expiry? <span aria-hidden="true">*</span></legend><div class="options"><label class="option"><input type="radio" name="trust_enter_expiry_email" value="yes" required> Yes</label><label class="option"><input type="radio" name="trust_enter_expiry_email" value="no"> No</label><label class="option"><input type="radio" name="trust_enter_expiry_email" value="unsure"> Unsure</label></div></fieldset></div>
+        <div class="field"><fieldset class="radio-set"><legend>Would you want to share reminders with another person? <span aria-hidden="true">*</span></legend><div class="options"><label class="option"><input type="radio" name="carer_share_want" value="yes" required> Yes</label><label class="option"><input type="radio" name="carer_share_want" value="no"> No</label><label class="option"><input type="radio" name="carer_share_want" value="na"> Not applicable</label></div></fieldset></div>
+      </section>
+
+      <section class="section-card" aria-labelledby="price-heading">
+        <div class="section-heading"><span class="step" aria-hidden="true">5</span><div><h2 id="price-heading">Price</h2><p>There is no payment here. We are only testing what feels fair, if anything.</p></div></div>
+        <div class="field"><fieldset class="radio-set"><legend>Would you use a free checklist? <span aria-hidden="true">*</span></legend><div class="options"><label class="option"><input type="radio" name="pay_0" value="yes" required> Yes</label><label class="option"><input type="radio" name="pay_0" value="no"> No</label></div></fieldset></div>
+        <div class="field price-grid">
+          <fieldset class="radio-set price-row"><legend><strong>£4.99</strong><small>one-off price</small></legend><div class="price-options"><label class="option"><input type="radio" name="pay_499" value="yes" required> Yes</label><label class="option"><input type="radio" name="pay_499" value="no"> No</label></div></fieldset>
+          <fieldset class="radio-set price-row"><legend><strong>£7.99</strong><small>one-off price</small></legend><div class="price-options"><label class="option"><input type="radio" name="pay_799" value="yes" required> Yes</label><label class="option"><input type="radio" name="pay_799" value="no"> No</label></div></fieldset>
+          <fieldset class="radio-set price-row"><legend><strong>£9.99</strong><small>one-off per renewal cycle</small></legend><div class="price-options"><label class="option"><input type="radio" name="pay_999" value="yes" required> Yes</label><label class="option"><input type="radio" name="pay_999" value="no"> No</label></div></fieldset>
+        </div>
+        <div class="field"><fieldset class="radio-set"><legend>Which pricing shape would you prefer? <span aria-hidden="true">*</span></legend><div class="options"><label class="option"><input type="radio" name="prefer_pricing" value="one_off" required> One-off</label><label class="option"><input type="radio" name="prefer_pricing" value="subscription"> Subscription</label><label class="option"><input type="radio" name="prefer_pricing" value="neither_wouldnt_pay"> Neither / I would not pay</label></div></fieldset></div>
+      </section>
+
+      <section class="section-card" aria-labelledby="end-heading">
+        <div class="section-heading"><span class="step" aria-hidden="true">6</span><div><h2 id="end-heading">End</h2><p>The detail behind your choice is especially useful.</p></div></div>
+        <div class="field"><label for="main-reason-use">What is the main reason you might use BadgeKeep? <span aria-hidden="true">*</span></label><textarea id="main-reason-use" name="main_reason_use" required></textarea></div>
+        <div class="field"><label for="main-reason-not">What is the main reason you might not use it? <span aria-hidden="true">*</span></label><textarea id="main-reason-not" name="main_reason_not" required></textarea></div>
+        <div class="field"><label for="contact-email">Email address <span class="hint">Optional — only if we may email you once with results. Please do not include anything sensitive.</span></label><input id="contact-email" name="contact_email" type="email" autocomplete="email" inputmode="email" placeholder="you@example.com"></div>
+        <div class="field consent"><label for="consent"><input id="consent" name="consent" type="checkbox" value="agreed" required> <span>I understand this is independent research, not an official service, and I have not submitted sensitive documents. <span aria-hidden="true">*</span></span></label></div>
+        <div class="form-footer"><button type="submit">Send my answers</button><p class="privacy-note">Your answers go to the independent research team through Formspree. Do not share badge numbers, NI numbers, medical details or documents.</p></div>
+      </section>
+    </form>
+  </main>
+  <footer class="site-footer"><div class="shell">BadgeKeep research is independent and is not GOV.UK or a council service.</div></footer>
+</body>
+</html>
